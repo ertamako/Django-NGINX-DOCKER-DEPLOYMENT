@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>CNVKit Pipeline</h1>
+<p>To understand every step that is taken in the batch command, as well to carry out a detailed analysis
+    of Copy Number Variation, here you can go through every step of the CNVKit Pipeline.
+    When running the pipeline, please be sure to perform every step as listed below.
+    Every command produces interim result files which for every execution of the same command will
+    overwrite the existing files. If you want to change any parameter of a step then you have to continue the
+    analysis from that step.
+    If you want to start another Pipeline session, when you are finished with this one, click the Button
+    "Start new Pipeline" and !refresh! the page.
+    Your results are saved <a href="{% url 'results' %}">here</a>.
+</p>
+
+<form enctype="multipart/form-data" id="start-pipeline" method="GET">
+    {% csrf_token %}
+    <button type="submit">Start new Pipeline</button>
+</form>
+<div id="start_answer"><p>The analysis id is the following: <mark id='analysis-id'>{{analysis_object.analysis_id}}</mark></p></div>
+
+<hr>
+
+<h2>Autobin</h2>
+<p>Generates target and (if relevant) antitarget BED files,
+    and prints a table of estimated average read depths and
+    recommended bin sizes on standard output.
+    It is important to upload also the samples used to create the
+    reference File in the section reference. Leave out the noisy bam files.</p>
+
+<form enctype="multipart/form-data" method="POST" id="autobin-form">
+    {% csrf_token %}
+    {{ bam_form|crispy }}
+    {{ bed_form|crispy }}
+    {{ rest_Autobin|crispy}}
+    <button type="submit" name="autobin_form_button" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-autobin">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="autobin_result"></div>
+<div id="output_err_autobin"></div>
+<hr>
+
+<h2>Coverage</h2>
+<p>By default, coverage is calculated via mean read depth from a pileup.
+    Alternatively, using the –count option counts the number of read start positions in the
+    interval and normalizes to the interval size (alternative algorithm).
+    All Files uploaded in the previous command will be used here.
+    </p>
+<form enctype="multipart/form-data" method="POST" id="cov-form">
+    {% csrf_token %}
+    {{coverage_form|crispy}}
+    <button type="submit" name="coverage_submit_button" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-coverage">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="cov_result"></div>
+<div id="output_err_cov"></div>
+<hr>
+
+<h2>Sex</h2>
+<form enctype="multipart/form-data" method="POST" id="sex-form">
+    <p>If there is any confusion in specifying either the sex of the sample or the construction of the reference copy
+        number profile use following form.</p>
+    {% csrf_token %}
+    <button type="submit" name="sex_form_button">Specify X and Y chromosome</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-sex">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="sex_results"></div>
+<div id="output_err_sex"></div>
+
+<h2>Reference</h2>
+<p>Choose the coverage (cnn) Files which you intend to use for the pooled reference file.
+    If no files are shown, please !refresh! the page.</p>
+
+<form enctype="multipart/form-data" method="POST" id="ref-form">
+    {% csrf_token %}
+    {{rest_Reference|crispy}}
+    {{fasta_form| crispy}}
+<button type="submit" name="pip_ref_button" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-ref">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="ref_result"></div>
+<div id="output_err_ref"></div>
+
+
+<h2>Fix</h2>
+<p>Combine the uncorrected target and antitarget coverage tables (.cnn) and correct for biases in regional coverage and
+    GC content, according to the given reference. Output a table of copy number ratios (.cnr).</p>
+
+<form enctype="multipart/form-data" method="POST" id="fix-form">
+    {% csrf_token %}
+    {{fix_form|crispy}}
+<button type="submit" name="fix_submit_button" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-fix">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="fix_result"></div>
+<div id="output_err_fix"></div>
+<hr>
+
+<h2>Segment</h2>
+<p>By default this uses the circular binary segmentation algorithm (CBS), but with the -m option, the faster Fused Lasso
+    algorithm (flasso) or even faster but less accurate HaarSeg algorithm (haar) can be used instead.
+
+    Fused Lasso additionally performs significance testing to distinguish CNAs from regions of neutral copy number,
+    whereas CBS and HaarSeg by themselves only identify the supported segmentation breakpoints.</p>
+
+<form enctype="multipart/form-data" method="POST" id="segment-form">
+        {% csrf_token %}
+        {{seg_form|crispy}}
+<button type="submit" name="segment_submit_button" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-segment">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="segment_result"></div>
+<div id="output_err_segment"></div>
+<hr>
+
+<h2>Call</h2>
+<p>Given segmented log2 ratio estimates (.cns), derive each segment’s absolute integer copy number using either:</p>
+
+<form enctype="multipart/form-data" method="POST" id="call-form" >
+        {% csrf_token %}
+        {{call_form|crispy}}
+<button type="submit" name="call_submit_button" value="submit">Submit</button>
+</form>
+
+    <div class="ajaxProgress" id="ajax-call">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+    </div>
+<div id="call_results"></div>
+<hr>
+
+<h2>Visualise Results</h2>
+<p>Given segmented log2 ratio estimates (.cns), derive each segment’s absolute integer copy number using either:</p>
+{% if vis_form %}
+<form enctype="multipart/form-data" target="_blank" method="POST" id="vis-form" >
+        {% csrf_token %}
+        {{vis_form|crispy}}
+<button type="submit" name="vis_submit_button" value="submit">Visualise</button>
+</form>
+{% endif %}
+<hr>
+
+<!--<p>In case you want to start a new pipeline click below. To resume your pipeline got to
+<a href="{% url 'results' %}">results page</a></p>
+<form enctype="multipart/form-data" id="start-pipeline2" method="POST"> &lt;!&ndash;ToDo&ndash;&gt;
+    {% csrf_token %}
+    <button type="submit">Start new Pipeline</button>
+</form>-->
+<br>
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static  'js/js_script_pipeline.js' %}"></script>
+
+
+{% endblock %}

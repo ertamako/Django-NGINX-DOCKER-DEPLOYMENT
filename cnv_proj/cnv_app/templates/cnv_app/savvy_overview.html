@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+<br>
+<h1>Savvy Overview</h1>
+<br>
+
+<p>This software analyses the read depth of off-target reads to detect CNVs. It requires a reasonable number
+    of samples sequenced using the same method. (Don't mix samples sequenced using different methods -
+    it won't work well.) The sample data must be provided in aligned BAM files.</p>
+
+
+<h2><u><a href="{% url 'savvycnv' %}">CoverageBinner</a></u></h2>
+<p>Each BAM file must be converted to a coverage summary file.</p>
+<!--<ol>
+    <li>Mapped sequencing reads (BAM)</li>
+    <li>Target bins (BED), if you don't provide this file, TST500C_manifest.bed will be used.</li>
+    <li>Genome sequence (FASTA), if you don't provide this file, human genome hg19.fasta will be used.</li>
+</ol>-->
+<h2><u><a href="{% url 'savvycnv' %}">SavvyCNV</a></u></h2>
+<p>The (size) parameter is the size of the chunks that the genome is split into. If you have targeted
+    sequencing with three million reads and about 50% off target reads, then a chunk size of 200,000 is appropriate.
+    It is sensible to process male and female samples separately if CNVs in the X/Y chromosomes are to be detected.
+    If you have a lot of samples and SavvyCNV takes a long time, then please use the SelectControlSamples software
+    described below. In addition, the following arguments can be provided:.</p>
+
+<h2><u><a href="{% url 'savvycnv' %}">SelectControlSamples</a></u></h2>
+<p>This software selects a subset of samples from a larger control pool that match a given sample or set of
+    samples best. This is useful if you have a lot of control samples, but SavvyCNV takes a long time to run
+    with all of them. SavvyCNV uses Singular Vector Decomposition (SVD), which takes time approximately proportional
+    to the number of samples to the power of 2.4, so if for example 150 samples takes 30 minutes, then 300 samples
+    will take a bit more than two and a half hours. SelectControlSamples prepares a statistical summary of a large
+    collection of samples, using SVD on a subset of those samples to identify the read depth patterns, then extending
+    it to the rest of the samples. This summary can then be interrogated to identify the most similar set of samples
+    to a sample that you wish to call CNVs on.</p>
+
+<p>The software has two modes of operation. The first mode takes a list of CoverageBinner files and produces a
+    summary file, having performed SVD. This operation takes considerable time, but only needs to be performed once.
+    The second mode of operation takes the summary file and a list of CoverageBinner files, and identifies the
+    CoverageBinner files that were used to create the summary that are most similar. This operation is fast.
+    Samples from the summary file that are also specified in this operation are automatically excluded from the output,
+    as it is not sensible to use a sample as its own control when searching for CNVs.</p>
+
+{% endblock %}

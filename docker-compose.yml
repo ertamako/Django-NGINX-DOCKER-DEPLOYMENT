@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000" # map project from port 8000 in host from host to port 8000 in our image
+    volumes:
+      - ./cnv_proj:/cnv_proj
+      - ./scripts:/scripts
+    command: "python manage.py runserver 0.0.0.0:8000"
+    #command: ping -c 5 localhost
+    environment:
+      - DEBUG=1
+    depends_on:
+      - postgres
+#    networks:
+#      - postgres
+#    restart: unless-stopped
+#  nginx:
+#    container_name: nginx_container
+#    image: library/nginx:1.19.2
+#    #depends_on: django
+#    ports:
+#      - "0.0.0.0:81:80"
+#    # networks:
+#     # -postgres
+#    restart: unless-stopped
+  postgres:
+    image: library/postgres:12.4
+    # build: ./postgres
+    environment:
+      - POSTGRES_USER=em
+      - POSTGRES_PASSWORD=mako'zz
+      - POSTGRES_DB=cnv_app
+#    ports:
+#      - "5000:5000"
+#    restart: unless-stopped
+#
+#  networks:
+#    postgres:
+#      driver: bridge
+#
+#volumes:
+#  postgres:

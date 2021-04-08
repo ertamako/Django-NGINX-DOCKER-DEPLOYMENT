@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<h1>Savvycnv</h1>
+<p>Welcome to savvycnv, a tool to analyse copy number variation!</p>
+<h5>You are continuing your analysis from: <mark id="analysis-id">{{analysis_object.analysis_id}}</mark></h5>
+
+<form enctype="multipart/form-data" method="POST" id="coverageBinner-form">
+    <h1>Bin Coverage</h1>
+    <p>First, each BAM file must be converted to a coverage summary file, provide
+        the sample data in aligned BAM files. This software analyses the read depth of
+        off-target reads to detect CNVs. It requires a reasonable number of samples
+        sequenced using the same method. (Don't mix samples sequenced using different methods
+        - it won't work well.)
+         </p>
+    {% csrf_token %}
+    {{ bam_form|crispy}}
+    <button type="submit" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-cov">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="cov_results"></div>
+
+<form enctype="multipart/form-data" method="POST" id="savvy-form">
+    <h1>SavvyCNV</h1>
+    <p>The (size) parameter is the size of the chunks that the genome is split into. If you have
+        targeted sequencing with three million reads and about 50% off target reads, then a chunk
+        size of 200,000 is appropriate. It is sensible to process male and female samples
+        separately if CNVs in the X/Y chromosomes are to be detected. If you have a lot of samples
+        and SavvyCNV takes a long time, then please use the SelectControlSamples software described below.</p>
+    {% csrf_token %}
+    {{ savvy_form|crispy }}
+    <button type="submit" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-savvy">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="savvy_results"></div>
+
+<!--
+
+<form enctype="multipart/form-data" method="POST" id="savvy-select-form">
+    <h1>SelectControlSamples</h1>
+    <p>This software selects a subset of samples from a larger control pool that match a given sample
+        or set of samples best. This is useful if you have a lot of control samples, but SavvyCNV
+        takes a long time to run with all of them.
+        SelectControlSamples prepares a statistical summary of a large collection of samples,
+        using SVD on a subset of those samples to identify the read depth patterns, then extending
+        it to the rest of the samples. This summary can then be interrogated to identify the most similar
+        set of samples to a sample that you wish to call CNVs on.
+    <p>The software has two modes of operation. The first mode takes a list of CoverageBinner
+        files and produces a summary file, having performed SVD. This operation takes considerable
+        time, but only needs to be performed once. The second mode of operation takes the summary
+        file and a list of CoverageBinner files, and identifies the CoverageBinner files that were
+        used to create the summary that are most similar. This operation is fast. Samples from the summary
+        file that are also specified in this operation are automatically excluded from the output, as it
+        is not sensible to use a sample as its own control when searching for CNVs.</p>
+    {% csrf_token %}
+    {{ savvy_form|crispy }}
+    <button type="submit" value="submit">Submit</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-savvy-select">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="savvy_select_results"></div>
+-->
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static  'js/js_script_savvy.js' %}"></script>
+
+
+{% endblock %}

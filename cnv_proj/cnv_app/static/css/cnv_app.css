@@ -1,0 +1,122 @@
+/* Style the header with a grey background and some padding yellow#ffc548*/
+.header {
+  overflow: hidden;
+  background-color: #337fda;
+  width=60px;
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+  right:140px;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  @media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+  .header-right {
+    float: none;
+  }
+}
+
+.div2 {
+     border: 1px solid black;
+     clear: both;
+}
+
+/*Sidenavigator left*/
+
+.sidenav {
+        height:100%;
+        width:178px;
+        float:left;
+        z-index:1;
+        top:0;
+        left:0;
+        background-color:grey;
+        overflow-x:hidden;
+        }
+
+.sidenav a, .dropdown-btn{
+        padding:6px 8px 6px 16px;
+        text-decoration:none;
+        font-size:25px;
+        color:black;
+        display:block;
+        border: none;
+        background: none;
+}
+
+
+.sidenav a:hover, .dropdown-btn:hover {
+  color: white;
+}
+
+.active {
+  background-color: #2a1e33;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+
+.dropdown-container {
+  display: none;
+  background-color: #a8b3ac;
+  padding-left: 8px;
+}
+
+
+.sidenav p{
+    padding:6px 8px 6px 16px;
+    text-decoration:none;
+    font-size:15px;
+    color:black;
+    display:block;
+}
+
+.main{
+    top: 3em;
+        margin-left:178px;
+        padding:0px 10px;
+}
+
+.ajaxProgress {
+    display:none;
+    text-align: center;
+    padding: 20 px;
+    width: 300 px;
+}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+<link rel="stylesheet" href="{% static 'js/dropzone/dist/dropzone.css' %}">
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+
+<h1>Batch</h1>
+
+
+    <p>This is for hybrid capture protocols in which both on- and off-target reads can be used for copy number detection.
+        Run the CNV-Pipeline in one submit with multiple sample files. Options on how to run CNVKit are listed below:</p>
+
+
+
+<form action="/file-upload" class="dropzone" id="MultiFileUpload">
+  <div class="fallback">
+ <input id="file" name="file" type="file" multiple />
+    <input type="submit" value="Upload"/>
+  </div>
+</form>
+
+
+
+
+<form enctype="multipart/form-data" id="batch-form" target="_blank" method="POST"> <!--action="/cnvResults_Batch/" target="_blank"-->
+    {% csrf_token %}
+
+    {{ method_form|crispy }}
+
+            {{ bam_form|crispy }}
+            {{ bed_form|crispy }}
+            {{ fasta_form|crispy }}
+            {{ sex_form|crispy }}
+
+    <br>
+    <ul>
+
+        <li>If you have want to create a pooled reference from the tumor samples you can run batch
+            with all tumor samples.
+        </li>
+    </ul>
+        <button type="submit" name="reference_submit_button">Run Batch to create a Reference Files</button>
+    <br>
+    <br>
+
+    <ul>
+
+        <li>If you already created a pooled Reference Please choose it accordingly below and do not
+            upload any Normal samples.
+        </li>
+    </ul>
+
+        {{ ref_form|crispy }}
+    <br>
+
+    <button type="submit" name="batch_submit_with_reference">Run Batch with Reference File</button>
+    <br>
+    <br>
+
+    <ul>
+        <!--<li>If you have paired normal samples please upload the matching tumor and normal sample.</li>-->
+        <li>If yun batch with tumor and normal samples, the reference file will be built from the normal samples you
+            uploaded. Be sure that before you have inspected the coverages of your samples with the metrics command,
+            eliminating any poor-quality samples.
+
+        </li>
+
+    </ul>
+    {{ normal_form|crispy }}
+
+    <button type="submit" name="batch_submit_button">Run Batch with Normal Samples</button>
+</form>
+
+<br>
+
+<script src="{% static  'js/dropzone/dist/dropzone.js' %}"></script>
+<script src="{% static 'js/js_script_dropzone_bam_upload.js' %}"></script>
+
+{% endblock %}

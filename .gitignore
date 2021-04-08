@@ -1,0 +1,8 @@
+# Staic Folders
+#####################
+cnv_proj/media/
+# Logs and databases #
+######################
+*.sql
+*.sqlite
+

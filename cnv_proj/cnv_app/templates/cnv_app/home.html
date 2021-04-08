@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<p>This Web-Application uses two different Tools CNVkit and savvyCNV to analyse the Copy Number variation from NG
+        Sequencing Data</p>
+
+<!--<img src="{% static 'images/ex_chr.png' %}" style=" border: solid black">-->
+
+Hello, {{ user.get_username|default:'Guest' }}!
+
+
+{% endblock %}

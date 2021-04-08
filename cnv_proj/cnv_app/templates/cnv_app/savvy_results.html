@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <h2><u><li>SavvyCNV Analysis Results</li></u></h2>
+    <p>Continue where you left your analysis or revisit your data</p>
+    {% for analysis in savvy_results %}
+    <div id="analysis-holder{{analysis.id}}">
+        <h5><a href="{% url 'savvycnv' analysis.analysis_id %}"> Results for {{analysis.analysis_id}}</a></h5>
+        <input type="button" value="Delete" onclick="delete_analysis({{result.id}})">
+    </div>
+    {% endfor %}
+    <hr>
+
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static  'js/js_script_savvy.js' %}"></script>
+
+{% endblock %}
+

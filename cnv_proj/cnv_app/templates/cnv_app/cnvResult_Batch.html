@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static%}
+
+{% block content %}
+
+<h2>Batch Result and Visualisation</h2>
+
+<h5>Samples from batch run id:<mark id="analysis-id">{{analysis_result.analysis_id}}</mark>, and batch run type:<mark>{{analysis_result.analysis_type}}</mark></h5>
+
+<h3>Call</h3>
+<p>Derive each segment’s absolute integer copy number using either: <p/>
+<ul>
+    <li>Rescaling copy number segments (.cns)- for a given known tumor cell fraction and normal ploidy, then simple
+    rounding to the nearest integer copy number.</li>
+    <li>A list of threshold log2 values for each copy number state (-m threshold), </li></ul>
+ <form enctype="multipart/form-data" method="POST", id="call-form">
+        {% csrf_token %}
+        {{ call_form | crispy }}
+        <button type="submit" name="call_button">Derive</button>
+    </form>
+
+<div class="ajaxProgress" id="ajax-call">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="call_results"></div>
+<div id="output_err_call"></div>
+
+<!--
+<h2>Call</h2>
+<p>Given segmented log2 ratio estimates (.cns), derive each segment’s absolute integer copy number using either:</p>
+
+<form enctype="multipart/form-data" method="POST" id="call-form" >
+        {% csrf_token %}
+        {{call_form|crispy}}
+<button type="submit" name="call_submit_button" value="submit">Submit</button>
+</form>
+
+    <div class="ajaxProgress" id="ajax-call">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+    </div>
+<div id="call_results"></div>
+<hr>
+-->
+
+<h3>Gain/Loss</h3>
+<p>Run command Genemetrics to identify targeted genes with copy number gain or loss above or below a threshold. <p/>
+ <form enctype="multipart/form-data" method="POST", id="genemetrics-form">
+        {% csrf_token %}
+        {{ genemetrics_form | crispy }}
+        <button type="submit" name="genemetrics_button">Show CNV's</button>
+    </form>
+
+<div class="ajaxProgress" id="ajax-genemetrics">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="genemetrics_results"></div>
+<div id="output_err_genemetrics"></div>
+
+<h3>Breaks</h3>
+<p>List the targeted genes in which a segmentation breakpoint occurs. This helps to identify genes in which
+    (a) an unbalanced fusion or other structural rearrangement breakpoint occured, or
+    (b) CNV calling is simply difficult due to an inconsistent copy number signal.</p>
+ <form enctype="multipart/form-data" method="POST", id="breaks-form">
+        {% csrf_token %}
+        {{ breaks_form | crispy }}
+        <button type="submit" name="breaks_button">List Breakpoints</button>
+    </form>
+
+<div class="ajaxProgress" id="ajax-breaks">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="breaks_results"></div>
+<div id="output_err_breaks"></div>
+
+<h3>Diagram</h3>
+<!------------------------------------------------------------------------------------------------------------------->
+
+<br>
+    {% for diagram in diagram_results %}
+    <embed src="{{ diagram.document.url }}" alt="{{ diagram.description }}" width="1200" height="900"
+        type="application/pdf"><p>{{ diagram.description }}</p>
+    {% endfor %}
+<!--
+    <iframe src="{{ diagram.document.url }}" width="1000px" height="800px"></iframe>
+-->
+
+
+{% if diagram_rest_results %}
+    {% for diagram in diagram_rest_results %}
+<div id="diagram-holder{{diagram.id}}">
+        <embed src="{{ diagram.document.url }}" alt="{{ diagram.description }}" width="1200" height="900"
+        type="application/pdf"><p>{{ diagram.description }}</p>
+    <p><input type="button" value="Delete" onclick="delete_diagram({{diagram.id}})"></p>
+    <br>
+</div>
+    {% endfor %}
+{% endif %}
+
+<form enctype="multipart/form-data" method="POST" id="diagram-form">
+    {% csrf_token %}
+    {{diagram_result_form|crispy}}
+    <button type="submit" name="diagram_button" value="submit">Create Diagram</button>
+</form>
+<div class="ajaxProgress" id="ajax-diagram">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="diagram_results"></div>
+<div id="output_err_diagram"></div>
+
+
+
+
+<h3>Scatter Plots</h3>
+<!------------------------------------------------------------------------------------------------------------------->
+<br>
+    {% for image in scatter_results %}
+    <img src="{{ image.document.url }}" alt="{{ image.description }}" style="border: solid black"><p>{{ image.description }}</p>
+    {% endfor %}
+
+{% if scatter_rest_results %}
+    {% for image in scatter_rest_results %}
+<div id="image-holder{{image.id}}">
+    <img id="image-{{image.id}}" src="{{ image.document.url }}" alt="{{ image.description }}" style="border: solid black">
+    <input type="button" value="Delete" onclick="delete_image({{image.id}})">
+    <p>{{ image.description }}</p>
+    <br>
+</div>
+    {% endfor %}
+{% endif %}
+
+<form enctype="multipart/form-data" method="POST" id="scatter-form">
+    {% csrf_token %}
+    {{scatter_result_form|crispy}}
+    <button type="submit" name="scatter_button" value="submit">Scatter</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-scatter">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="scatter_results"></div>
+<div id="output_err_scatter"></div>
+
+<hr>
+
+<h3>Heatmaps</h3>
+<!------------------------------------------------------------------------------------------------------------------->
+<br>
+    {% for heatmap in heatmap_results %}
+    <!--<img src="{{ heatmap.document.url }}" alt="{{ heatmap.description }}" style="border: solid black"><p></p>-->
+    <embed src="{{ heatmap.document.url }}" alt="{{ heatmap.description }}" width="1200" height="900"
+        type="application/pdf"><p>{{ heatmap.description }}</p>
+    {% endfor %}
+<br>
+
+{% if heatmap_rest_results %}
+    {% for heatmap in heatmap_rest_results %}
+<div id="heatmap-holder{{heatmap.id}}">
+<!--    <img id="heatmap-{{heatmap.id}}" src="{{ heatmap.document.url }}" alt="{{ heatmap.description }}" style="border: solid black">-->
+    <embed id="heatmap-{{heatmap.id}}"  src="{{ heatmap.document.url }}" alt="{{ heatmap.description }}" width="1200" height="900"
+        type="application/pdf"><p>{{ heatmap.description }}</p>
+    <input type="button" value="Delete" onclick="delete_heatmap({{heatmap.id}})">
+    <p>{{ heatmap.description }}</p>
+    <br>
+</div>
+    {% endfor %}
+{% endif %}
+
+<form enctype="multipart/form-data" method="POST" id="heatmap-form">
+    {% csrf_token %}
+    {{heatmap_result_form|crispy}}
+    <button type="submit" name="heatmap_button" value="submit">Create Heatmap</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-heatmap">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="heatmap_results"></div>
+<div id="output_err_heatmap"></div>
+
+<hr>
+
+
+
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static  'js/js_script_batchResult.js' %}"></script>
+
+{% endblock %}

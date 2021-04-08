@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+<br>
+<h1>CNVkit Overview</h1>
+<br>
+
+<img src="../static/images/CNVKit_overview.png" style="float: right;
+     margin-right: 20px; margin-bottom: 10px; width:500px; border: solid black; clear: both">
+
+<p>CNVkit is an open source tool to analyse Copy Number Variation (CNV's), which makes use of a
+    read-deapth based approach to estimate copy number. Additionally CNVKit uses information
+    from both on and off-target aligned reads to calculate the
+    CNV's across the genome.</p>
+
+
+<h2><u><a href="{% url 'batch' %}">CNVKit Workflow</a></u></h2>
+<p>For running the analysis following files are Necessary: </p>
+<ol>
+    <li>Mapped sequencing reads (BAM)</li>
+    <li>Target bins (BED), if you don't provide this file, TST500C_manifest.bed will be used.</li>
+    <li>Genome sequence (FASTA), if you don't provide this file, human genome hg19.fasta will be used.</li>
+</ol>
+<p>Given the circumstances of your data check the following scenarios to
+    perform your analysis</p>
+
+<ul>
+    <li>No Normal Samples</li>
+    <p>In case you lack normal samples run CNVKit Batch
+        with all samples specified as tumor samples, to build a
+        flat reference, yielding coverages, copy ratios, segments and optionally plots for
+        all samples. Inspect the “rough draft” outputs and determine an appropriate strategy
+        to build pooled Referenceto re-analyze the
+        samples in Batch.</p>
+
+    <li>With Normal Samples</li>
+    <p>Run batch with just the normal samples specified as normal, yielding coverage .cnn
+        files and a pooled reference. Inspect the coverages of all samples with
+        the metrics command, eliminating any poor-quality samples. Rerun batch with
+        the chosen normal samples or create a pooled Referenceto use in Batch.</p>
+
+</ul>
+<!--<p>For both scenarios if you want to adjust parameters in the CNVKit Pipeline to
+    perform and understand every step of it, check <a href="{% url 'cnvkit_pipeline' %}">CNVkit Pipeline</a>.
+    The pipeline requires you to have build your pooled Reference as explained in the next section.
+</p>-->
+
+
+<!--<h2><u>Initial configuration</u></h2>
+
+<p>
+    The company which
+    delivers the sequence technology and kit, will provide the
+    list of the targeted genes as a BED file Format.
+    Inaccessible regions, e.g. telomeres and centromeres, are
+    masked out with N in the reference genome sequence.
+    In the initial configuration it is therefore importand to
+    filter those to identify the coordinates of the
+    accessible regions (those between the long spans of N’s).
+    As a result we have the on and off target regions specified.</p>-->
+
+
+<h2><u><a href="{% url 'reference_view' %}">Create a pooled reference</a></u></h2>
+
+<p>To detect copy number variation, it is crucial to build a reference
+    file. The reference can be a a pool of normal samples or if lacking normal
+    samples, a good practice is building a pooled reference from all available tumor
+    samples. In both cases you need to follow these steps to improve your results:</p>
+<ol>
+    <li>Run CNVKit Batch command without normal samples. In this case
+        a Flat reference which assumes equal coverage in all bins, will be created.
+    </li>
+    <li>Scatter the copy number segments and ratios from the first run with the Flat Reference,
+        this will visualize the spread of the bins in order to filter very noisy samples.
+    </li>
+    <li>Use the metrics command to calculate the spread of bin-level copy ratios from
+        the corresponding final segments using several statistics. These statistics
+        help quantify how “noisy” a sample is and help to decide which samples to select
+        for a reference copy number profile.
+    </li>
+    <li>After analysing the samples with scatter and metrics select the bam
+        samples you want to use for your pooled reference.
+    </li>
+</ol>
+<p>It is important to keep the copy number reference file consistent for the
+    duration of a project, reusing the same reference for bias correction of
+    all tumor samples in a cohort. If your library preparation protocol changes,
+    it’s usually best to build a new reference file and use the new file to analyze
+    the samples prepared under the new protocol.</p>
+
+
+<!--<h2><u><a href="{% url 'cnvkit_pipeline' %}">CNVKit Pipeline</a></u></h2>
+<p>The pipeline is composed of the following steps:</p>
+<ul>
+    <li>Autobin: Calculates a reasonable bin size for target and antitarget region.
+        Generates target and antitarget binned files.</li>
+    <li>Coverage: Calculates the binned target and antitarget read depths (coverage) according to the
+        bins specified in the target and off-target bed files created in Autobin</li>
+    <li>Reference:
+
+    </li>
+
+</ul>-->
+
+
+<h2><u><a href="{% url 'results' %}">Inspect and Visualize your CNV's</a></u></h2>
+
+<p>When you run Batch the Tool provides the necessary Files, with which according to the parameters chosen by you
+    CNV's can be determined. You can inspect your samples using scatter plots of specific regions in the chromosome.
+    With scatter you can plot bin-level log2 coverages and segmentation calls together.
+    To get an overview of the larger-scale CNVs in a cohort use a heatmap graph.</p>
+{% endblock %}

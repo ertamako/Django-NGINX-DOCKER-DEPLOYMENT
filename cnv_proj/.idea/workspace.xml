@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="84641b78-a893-4119-aabb-be9bb8a107ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/environment.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postgres/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/entrypoint.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/start-server.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.git.bfg-report/2020-07-24/16-37-13/cache-stats.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.git.bfg-report/2020-07-24/16-37-13/deleted-files.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.git.bfg-report/2020-07-24/16-37-13/object-id-map.old-new.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cnv_proj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cnv_proj.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/CoverageBinner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/FishersExactTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/Interval.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/PrepareLinkageData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/SavvyCNV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/SavvyHomozygosity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/SavvySharedHaplotypes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/SavvyVcfHomozygosity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SavvySuite-master/VariantArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnv_app/static/js/js_script_pipeline.js" beforeDir="false" afterPath="$PROJECT_DIR$/cnv_app/static/js/js_script_pipeline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnv_app/templates/cnv_app/all_results.html" beforeDir="false" afterPath="$PROJECT_DIR$/cnv_app/templates/cnv_app/all_results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnv_app/templates/cnv_app/cnvkit_pipeline.html" beforeDir="false" afterPath="$PROJECT_DIR$/cnv_app/templates/cnv_app/cnvkit_pipeline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnv_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnv_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnv_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnv_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnv_proj/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnv_proj/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3-journal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_project_visualized.png" beforeDir="false" afterPath="$PROJECT_DIR$/my_project_visualized.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="ProjectId" id="1X7RdT3r0KYxpQyuKrCoRF9Vaqy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cnv_app/static/cnv_app/call_CNS" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cnv_app/static/cnv_app/call_CNS" />
+      <recent name="$PROJECT_DIR$/cnv_app/static/cnv_app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/media/Data" />
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$/media/CNVKit/Batch" />
+      <recent name="$PROJECT_DIR$/media/CNVKit" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Django: runserver">
+    <configuration name="Unnamed" type="CompoundRunConfigurationType">
+      <toRun name="Django: runserver" type="PythonConfigurationType" />
+      <toRun name="Django: runserver2" type="PythonConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="Django: runserver" type="PythonConfigurationType" />
+      <toRun name="Django: runserver2" type="PythonConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Django: runserver" type="PythonConfigurationType" factoryName="Python">
+      <module name="cnv_proj" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="cnv_proj" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Compound.Unnamed" />
+      <item itemvalue="Python.Django: runserver" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="84641b78-a893-4119-aabb-be9bb8a107ba" name="Default Changelist" comment="" />
+      <created>1580395234223</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580395234223</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="458" y="144" width="732" height="637" key="#Inspections" timestamp="1594739211718">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="458" y="144" width="732" height="637" key="#Inspections/59.27.1541.873@59.27.1541.873" timestamp="1594739211718" />
+    <state x="287" y="120" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596823058147">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="287" y="120" key="#com.intellij.execution.impl.EditConfigurationsDialog/59.27.1541.873@59.27.1541.873" timestamp="1596823058147" />
+    <state x="536" y="264" width="626" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598004093878">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="536" y="264" width="626" height="396" key="#com.intellij.fileTypes.FileTypeChooser/59.27.1541.873@59.27.1541.873" timestamp="1598004093878" />
+    <state x="562" y="211" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598018911705">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="562" y="211" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/59.27.1541.873@59.27.1541.873" timestamp="1598018911705" />
+    <state x="612" y="220" width="424" height="484" key="FileChooserDialogImpl" timestamp="1596822716570">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="612" y="220" width="424" height="484" key="FileChooserDialogImpl/59.27.1541.873@59.27.1541.873" timestamp="1596822716570" />
+    <state width="1518" height="272" key="GridCell.Tab.0.bottom" timestamp="1596896289749">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.0.bottom/59.27.1541.873@59.27.1541.873" timestamp="1596896289749" />
+    <state width="1518" height="272" key="GridCell.Tab.0.center" timestamp="1596896289749">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.0.center/59.27.1541.873@59.27.1541.873" timestamp="1596896289749" />
+    <state width="1518" height="272" key="GridCell.Tab.0.left" timestamp="1596896289746">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.0.left/59.27.1541.873@59.27.1541.873" timestamp="1596896289746" />
+    <state width="1518" height="272" key="GridCell.Tab.0.right" timestamp="1596896289749">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.0.right/59.27.1541.873@59.27.1541.873" timestamp="1596896289749" />
+    <state width="1518" height="272" key="GridCell.Tab.1.bottom" timestamp="1596896289752">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.1.bottom/59.27.1541.873@59.27.1541.873" timestamp="1596896289752" />
+    <state width="1518" height="272" key="GridCell.Tab.1.center" timestamp="1596896289750">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.1.center/59.27.1541.873@59.27.1541.873" timestamp="1596896289750" />
+    <state width="1518" height="272" key="GridCell.Tab.1.left" timestamp="1596896289749">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.1.left/59.27.1541.873@59.27.1541.873" timestamp="1596896289749" />
+    <state width="1518" height="272" key="GridCell.Tab.1.right" timestamp="1596896289751">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state width="1518" height="272" key="GridCell.Tab.1.right/59.27.1541.873@59.27.1541.873" timestamp="1596896289751" />
+    <state x="439" y="76" width="770" height="773" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1597680824256">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="439" y="76" width="770" height="773" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/59.27.1541.873@59.27.1541.873" timestamp="1597680824256" />
+    <state x="296" y="124" width="1118" height="648" key="dock-window-1" timestamp="1597709733611">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="296" y="124" width="1118" height="648" key="dock-window-1/59.27.1541.873@59.27.1541.873" timestamp="1597709733611" />
+    <state x="59" y="27" width="1439" height="867" key="dock-window-2" timestamp="1597914836484">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="59" y="27" width="1439" height="867" key="dock-window-2/59.27.1541.873@59.27.1541.873" timestamp="1597914836484" />
+    <state x="492" y="212" width="672" height="678" key="search.everywhere.popup" timestamp="1597508392083">
+      <screen x="59" y="27" width="1541" height="873" />
+    </state>
+    <state x="492" y="212" width="672" height="678" key="search.everywhere.popup/59.27.1541.873@59.27.1541.873" timestamp="1597508392083" />
+  </component>
+</project>

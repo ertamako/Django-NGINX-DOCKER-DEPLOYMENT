@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<h1>Create a (pooled) reference</h1>
+<br>
+<p>Before creating a reference File, it is of importance to quickly
+    check whether there are samples that are very noisy.</p>
+
+<p>Here you can see the visualised coverage ratios of your uploaded samples. To create your reference you must
+    choose the files with minimal and non-recurrent CNVs</p>
+
+
+<br>
+    <p>Samples from batch run id:<mark id="analysis-id">{{analysis_results.analysis_id}}</mark>, and batch run type:<mark>{{analysis_results.analysis_type}}</mark></p>
+    {% for image in scatter_results %}
+    <img src="{{ image.document.url }}" alt="{{ image.description }}" style="border: solid black">
+    <p>{{ image.description }}</p>
+    {% endfor %}
+
+<hr>
+
+<h2>Metrics</h2>
+<form enctype="multipart/form-data" method="POST" id="met-form">
+    <p>Calculate the spread of bin-level copy ratios from the corresponding final segments using several statistics.
+        These statistics help quantify how “noisy” a sample is and help to decide which samples to exclude from an
+        analysis,
+        or to select normal samples for a reference copy number profile.</p>
+    {% csrf_token %}
+    <button type="submit" name="met_form_button">Run Metrics for the above samples</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-met">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="met_results"></div>
+<div id="output_err_met"></div>
+
+<p>Interpretation:</p>
+<ul>
+    <li>Total number of segments (in the .cns file) – a large number of segments can indicate that the sample has either
+        many real CNAs, or noisy coverage and therefore many spurious segments.
+    </li>
+    <li>Uncorrected sample standard deviation – this measure is prone to being inflated by a few outliers, such as may
+        occur in regions of poor coverage or if the targets used with CNVkit analysis did not exactly match the capture.
+        (Also note that the log2 ratio data are not quite normally distributed.) However, if a sample’s standard
+        deviation is drastically higher than the other estimates shown by the metrics command, that helpfully indicates
+        the sample has some outlier bins.
+    </li>
+    <li>Median absolute deviation (MAD) – very robust against outliers, but less statistically efficient.</li>
+    <li>Interquartile range (IQR) – another robust measure that is easy to understand</li>
+    <li>Tukey’s biweight midvariance – a robust and efficient measure of spread.</li>
+</ul>
+
+
+<h2>Sex</h2>
+<form enctype="multipart/form-data" method="POST" id="sex-form">
+    <p>If there is any confusion in specifying either the sex of the sample or the construction of the reference copy
+        number profile use following form.</p>
+    {% csrf_token %}
+    <button type="submit" name="sex_form_button">Specify X and Y chromosome</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-sex">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="sex_results"></div>
+<div id="output_err_sex"></div>
+
+
+<h2>Reference</h2>
+<p>In the reference file the GC content and repeat-masked proportion
+    of each region is calculated. Edge effects are corrected.</p>
+<ol>
+<li>Extract copy number information from one or a small number of tumor samples when no suitable reference or set of
+        normal samples is available. The copy number calls will not be as accurate, but large-scale CNVs may still be
+        visible.
+    </li>
+    <li>To analyze a cohort sequenced on a single platform, combine all normal samples into a pooled
+        reference, even if matched tumor-normal pairs were sequenced – according to cnvkit benchmarking a pooled reference
+        performes slightly better than constructing a separate reference for each matched tumor-normal pair.
+    </li>
+</ol>
+
+<form enctype="multipart/form-data" method="POST" id="ref-form">
+    {% csrf_token %}
+    {{fasta_form|crispy}}
+    {{ref_form|crispy}}
+    <button type="submit" name="pooled_reference_submit_button" value="submit">Create Reference</button>
+</form>
+
+<div class="ajaxProgress" id="ajax-ref">
+        <h3>Please wait...</h3>
+    <img src="{% static '/images/ajax-loader.gif' %}"/>
+</div>
+<div id="ref_result"></div>
+<div id="output_err_ref"></div>
+
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static  'js/js_script_pooledReference.js' %}"></script>
+
+{% endblock %}
